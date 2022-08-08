@@ -1,0 +1,40 @@
+{% extends "base.html" %} {% block title %}Recipes{% endblock %} {% block content%}
+  <h1 align="center">Recipe Editor</h1>
+  <ul class="list-group list-group-flush" id="recipes">
+    {% for recipe in recipes %}
+      {% if recipe.user_id == user.id %}
+      <div class="shadow p-3 mb-5 bg-body rounded">
+      
+        <form method="POST">
+          
+          Recipe Name
+          <textarea name="recipe_name" id="recipe_name" class="form-control" placeholder="Recipe Name" rows="1">{{ recipe.recipeName }}</textarea></br>
+          Ingredients
+          <textarea name="recipe_ingredients" id="recipe_ingredients" class="form-control" placeholder="Ingredients" rows="3">{{ recipe.recipeIngredients }}</textarea></br>
+          Instructions
+          <textarea name="recipe_body" id="recipe_body" class="form-control" placeholder="Instructions" rows="5">{{ recipe.recipeBody }}</textarea></br>
+          Tags
+          <textarea name="recipe_tags" id="recipe_tags" class="form-control" placeholder="Tags" rows="1">{{ recipe.recipeTags }}</textarea>
+          </br>
+
+          <button type="submit" class="btn btn-secondary" name="submit" value="submit">Submit</button>
+
+          <a href="{{ url_for('views.my_recipes')}}">
+            <button type="button" class="btn btn-outline-secondary btn-sm">Return
+            </button>
+          </a>
+          
+          <button type="button" class="close" onClick="deleteRecipe({{ recipe.id }})" title="Delete">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+        </form>
+
+      </div>
+      {% endif %}
+    {% endfor %}
+    
+  </ul>
+  {% endblock %}
+
+  

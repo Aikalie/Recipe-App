@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block title %}My Recipes{% endblock %} {% block content%}
+</script>
+  <h1 align="center">My Recipes</h1>
+  <ul class="list-group list-group-flush" id="recipes">
+    {% for recipe in recipes %}
+      {% if recipe.user_id == user.id %}
+      <div class="shadow p-3 mb-5 bg-body rounded">
+      <li class="list-group-item">
+        <h4>Recipe: {{ recipe.recipeName }}</h4>
+        Ingredients: <pre>{{ recipe.recipeIngredients }}</pre>
+        Instructions: <pre>{{ recipe.recipeBody }}</pre>
+        {% if recipe.recipeTags %}
+          <small>Tags: {{ recipe.recipeTags }}</small></br></br>
+        {% endif %}
+        <button type="button" title="Edit">
+          <a href="{{ url_for('views.edit_recipe', id=recipe.id)}}">
+          <span aria-hidden="true"<i class="fa fa-pencil"></i>
+          </span></a>
+        </button>
+        <button type="button" class="close" onClick="deleteRecipe({{ recipe.id }})" title="Delete">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </li>
+    </div>
+      {% endif %}
+    {% endfor %}
+  </ul>
+  {% endblock %}

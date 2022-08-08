@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
+  <h1 align="center">Recipes</h1>
+
+  <ul class="list-group list-group-flush" id="recipes">
+    {% for recipe in recipes %}
+    <div class="shadow p-3 mb-5 bg-body rounded">
+    <li class="list-group-item">
+      <button type="button" class="close" onClick="" title="Favorite" style="color:red;">
+        <span aria-hidden="true" class="fa fa-heart-o"></span>
+      </button>
+      <h4>Recipe: {{ recipe.recipeName }}</h4>
+      <small>By: {{ recipe.recipeAuthor }}</small> </br>  
+      Ingredients: <pre>{{ recipe.recipeIngredients }}</pre>
+      Instructions: <pre>{{ recipe.recipeBody }}</pre>
+      {% if recipe.recipeTags %}
+        <small>Tags: {{ recipe.recipeTags }}</small> 
+      {% endif %}
+    </li>
+    </div>
+    {% endfor %}
+  </ul>
+  
+  {% endblock %}
